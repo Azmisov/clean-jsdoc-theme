@@ -1,3 +1,24 @@
+## Modifications:
+This is my repository holding some modifications to the base clean-jsdoc-theme. Theme changes:
+
+- The navigation sidebars have been moved to be adjacent to the main content. For large desktop screens, I found it annoying that you have to move the cursor so far just to navigate.
+- Since main content width is limited, I added a papery background + shadow to the sides to separate it better
+- Removed "collapsability" in the left navigation, as all my projects have a small number of classes/variables so doesn't make sense. Also having them always visible ensures users don't miss looking at the API docs
+- Moved the top navigation bar to be on the right instead. The preset jsdoc config (see below) will place a large GitHub and NPM icon at the top
+- Right navigation (table of contents) is not hidden for smaller desktop screens
+- Styled level 3 headers on API pages, to better visually separate content and break up the wall of text
+- Colored sub-section titles
+- Tighter layout in general. I think the coloring/styling of headers replaces the need to separate everything with large spaces. And I prefer to have more text on the page over having to scroll so much.
+- Small styling changes to help separate categories, icons, etc
+
+To use, add `variant_theme: true` in `theme_opts`. There is also a preset jsdoc config file I've included, which pulls information from `package.json` enabling a configless documentation setup:
+```sh
+jsdoc --configure ./node_modules/clean-jsdoc-theme/preset_jsdoc_config.js
+```
+
+[View this package](https://azmisov.github.io/node-boundary/) to see a demo of the variant theme
+
+
 # clean-jsdoc-theme
 
 [![Stars](https://img.shields.io/github/stars/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme) [![Fork](https://img.shields.io/github/forks/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/fork) ![Version](https://img.shields.io/badge/version-4.1.9-005bff) [![Issues Open](https://img.shields.io/github/issues/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/issues) [![Contributors](https://img.shields.io/github/contributors/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/graphs/contributors) [![Build Status](https://travis-ci.org/ankitskvmdam/clean-jsdoc-theme.svg?branch=production)](https://travis-ci.org/ankitskvmdam/clean-jsdoc-theme) [![license](https://img.shields.io/github/license/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/blob/master/LICENSE)

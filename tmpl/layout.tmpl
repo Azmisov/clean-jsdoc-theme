@@ -77,6 +77,9 @@
     </script>
 
     <link rel="stylesheet" href="styles/clean-jsdoc-theme.min.css">
+    <?js if(this.themeVariant) { ?>
+    <link rel="stylesheet" href="styles/clean-jsdoc-theme-variation.css">
+    <?js } ?>
     <?js if(this.dynamicStyle != undefined ) { ?>
     <style>
       <?js= this.dynamicStyle ?>

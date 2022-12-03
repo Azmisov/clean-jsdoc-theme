@@ -969,6 +969,7 @@ exports.publish = function (taffyData, opts, tutorials) {
     view.includeCss = includeCss();
     view.meta = getMetaTagData();
     view.theme = getTheme();
+    view.themeVariant = themeOpts.variant_theme || false;
     // once for all
     view.sidebar = buildSidebar(members);
     view.navbar = buildNavbar();
