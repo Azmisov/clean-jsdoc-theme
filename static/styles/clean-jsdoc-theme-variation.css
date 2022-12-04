@@ -244,4 +244,7 @@ body.light{ background:url("../images/binding_light.webp") repeat #e6e6e6;}
 	.main-wrapper{
 		padding:.5rem 1.25rem !important;
 	}
+	.navbar-container{
+		display:none !important;
+	}
 }
