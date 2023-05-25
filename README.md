@@ -24,10 +24,10 @@ any tutorials to be included.
 
 # clean-jsdoc-theme
 
-[![Stars](https://img.shields.io/github/stars/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme) [![Fork](https://img.shields.io/github/forks/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/fork) ![Version](https://img.shields.io/badge/version-4.1.9-005bff) [![Issues Open](https://img.shields.io/github/issues/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/issues) [![Contributors](https://img.shields.io/github/contributors/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/graphs/contributors) [![Build Status](https://travis-ci.org/ankitskvmdam/clean-jsdoc-theme.svg?branch=production)](https://travis-ci.org/ankitskvmdam/clean-jsdoc-theme) [![license](https://img.shields.io/github/license/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/blob/master/LICENSE)
+[![Stars](https://img.shields.io/github/stars/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme) [![Fork](https://img.shields.io/github/forks/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/fork) ![Version](https://img.shields.io/badge/version-4.2.8-005bff) [![Issues Open](https://img.shields.io/github/issues/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/issues) [![Contributors](https://img.shields.io/github/contributors/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/graphs/contributors) [![Build Status](https://travis-ci.org/ankitskvmdam/clean-jsdoc-theme.svg?branch=production)](https://travis-ci.org/ankitskvmdam/clean-jsdoc-theme) [![license](https://img.shields.io/github/license/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/blob/master/LICENSE)
 <br>
 
-`clean-jsdoc-theme` is a beautifully crafted theme for JSDoc 3. It is a clean and fully responsive theme with loads of
+`clean-jsdoc-theme` is a beautifully crafted theme for JSDoc 3/JSDoc 4. It is a clean and fully responsive theme with loads of
 customisation features.
 
 Some salient features:
@@ -175,7 +175,8 @@ To set a favicon, add the following in your JSDoc config file:
 ```
 
 You can use [`static_dir`](#add-static-dir) option to copy all you static files to output dir and use that path instead
-of `path/to/img`.
+of `path/to/img`. This will not flatten the output file path, it will preserve the directory structure. If you want to
+flatten the output dir use jsdoc default [copy static files options](https://jsdoc.app/about-configuring-default-template.html)
 
 ### Add homepage title
 
@@ -200,6 +201,18 @@ example of this is below:
 
 You can use [`static_dir`](#add-static-dir) option to copy all you static files to output dir and use that path in place
 of `path/to/img`.
+
+### Add files list in homepage
+
+By default `clean-jsdoc-theme` will not include the list of files in the homepage. If you want to add them the do the following
+
+```json
+"theme_opts": {
+  "includeFilesListInHomepage": true // by default it is false.
+}
+```
+
+> Note: You need to add @file tag in the .js if you want to include it in the file list. For more details on `@file` visit: https://jsdoc.app/tags-file.html
 
 ### Add navbar menu
 
@@ -428,6 +441,17 @@ To include js files. Example:
 It will include the js files to the output dir and also attach a script tag to the html pointing to the included js
 file.
 
+### To ignore sorting
+
+To ignore the sorting of members/methods/event in the page. If it is `false` then the order of
+members/methods/events will be in the order they are in code/source.
+
+```json
+"theme_opts": {
+  "sort": false
+}
+```
+
 ### Footer
 
 ```json
@@ -448,26 +472,29 @@ This will remove all symbols (members, methods ...) that come from inherited par
 
 ## Cheat sheet
 
-| name                | default                                                                                                      | use case                                                                   | expected value(s)     |
-| ------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- | --------------------- |
-| `default_theme`     | `"dark"`                                                                                                     | To set the default theme                                                   | `"light" or "dark"`   |
-| `homepageTitle`     | "Home"                                                                                                       | To set the title of homepage                                               | `string`              |
-| `title`             | `null`                                                                                                       | To set the title                                                           | `HTML` or `string`    |
-| `base_url`          | `/`                                                                                                          | To set the base URL                                                        | `string`              |
-| `menu`              | `null`                                                                                                       | To render extra link in navbar                                             | Array of Object(s)    |
-| `meta`              | `null`                                                                                                       | Meta tag attributes                                                        | Array of Object(s)    |
-| `search`            | `true`                                                                                                       | To render search or not                                                    | `true` or `false`     |
-| `codepen`           | `{}`                                                                                                         | To open code in codepen                                                    | `Object`              |
-| `static_dir`        | `null`                                                                                                       | To include static dir                                                      | Array of string       |
-| `create_style`      | `null`                                                                                                       | To create custom style rules                                               | `string`              |
-| `add_style_path`    | `null`                                                                                                       | To add external css libraries/files                                        | Array of Object(s)    |
-| `include_css`       | `null`                                                                                                       | To include css files                                                       | Array of string       |
-| `add_scripts`       | `null`                                                                                                       | To create custom script                                                    | `string`              |
-| `add_script_path`   | `null`                                                                                                       | To add external js libraries/files                                         | Array of Object(s)    |
-| `include_js`        | `null`                                                                                                       | To include js files                                                        | `string`              |
-| `footer`            | `null`                                                                                                       | To render footer                                                           | `HTML` or `string`    |
-| `exclude_inherited` | `false`                                                                                                      | To exclude inherited symbols                                               | `boolean`             |
-| `sections`          | `["Modules", "Classes", "Externals", "Events", "Namespaces", "Mixins", "Tutorials", "Interfaces", "Global"]` | To order navbar/sidebar sections or to hide/remove navbar/sidebar sections | `Array<SECTION_TYPE>` |
+| name                         | default                                                                                                      | use case                                                                   | expected value(s)     |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- | --------------------- |
+| `default_theme`              | `"dark"`                                                                                                     | To set the default theme                                                   | `"light" or "dark"`   |
+| `homepageTitle`              | "Home"                                                                                                       | To set the title of homepage                                               | `string`              |
+| `title`                      | `null`                                                                                                       | To set the title                                                           | `HTML` or `string`    |
+| `base_url`                   | `/`                                                                                                          | To set the base URL                                                        | `string`              |
+| `menu`                       | `null`                                                                                                       | To render extra link in navbar                                             | Array of Object(s)    |
+| `meta`                       | `null`                                                                                                       | Meta tag attributes                                                        | Array of Object(s)    |
+| `search`                     | `true`                                                                                                       | To render search or not                                                    | `true` or `false`     |
+| `codepen`                    | `{}`                                                                                                         | To open code in codepen                                                    | `Object`              |
+| `static_dir`                 | `null`                                                                                                       | To include static dir                                                      | Array of string       |
+| `create_style`               | `null`                                                                                                       | To create custom style rules                                               | `string`              |
+| `add_style_path`             | `null`                                                                                                       | To add external css libraries/files                                        | Array of Object(s)    |
+| `include_css`                | `null`                                                                                                       | To include css files                                                       | Array of string       |
+| `add_scripts`                | `null`                                                                                                       | To create custom script                                                    | `string`              |
+| `add_script_path`            | `null`                                                                                                       | To add external js libraries/files                                         | Array of Object(s)    |
+| `include_js`                 | `null`                                                                                                       | To include js files                                                        | `string`              |
+| `footer`                     | `null`                                                                                                       | To render footer                                                           | `HTML` or `string`    |
+| `exclude_inherited`          | `false`                                                                                                      | To exclude inherited symbols                                               | `boolean`             |
+| `sections`                   | `["Modules", "Classes", "Externals", "Events", "Namespaces", "Mixins", "Tutorials", "Interfaces", "Global"]` | To order navbar/sidebar sections or to hide/remove navbar/sidebar sections | `Array<SECTION_TYPE>` |
+| `displayModuleHeader`        | `false`                                                                                                      | If you want the module name to appear on its page                          | `boolean`             |
+| `includeFilesListInHomepage` | `false`                                                                                                      | If you want to add or remove the list of files in homepage                 | `boolean`             |
+| `sort`                       | `true`                                                                                                       | To sort the output members/methods/events                                  | `boolean`             |
 
 Don't forget to add the following in your jsdoc config file, otherwise toc will not work on some pages.
 
