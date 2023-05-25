@@ -15,6 +15,9 @@ To use, add `variant_theme: true` in `theme_opts`. There is also a preset jsdoc 
 ```sh
 jsdoc --configure ./node_modules/clean-jsdoc-theme/preset_jsdoc_config.js
 ```
+To work, the following `package.json` options should be defined: main, homepage, name, author, description,
+and repository.url. It searches for `.mjs` source files. Optionally, include a `tutorials` directory for
+any tutorials to be included.
 
 [View this package](https://azmisov.github.io/node-boundary/) to see a demo of the variant theme
 

@@ -11,16 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ankitskvmdam/clean-jsdoc-theme.git"
+    "url": "git+https://github.com/Azmisov/clean-jsdoc-theme.git"
   },
-  "author": "Ank",
+  "author": "Ank, Isaac Nygaard",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ankitskvmdam/clean-jsdoc-theme/issues"
+    "url": "https://github.com/Azmisov/clean-jsdoc-theme/issues"
   },
-  "homepage": "https://ankdev.me/clean-jsdoc-theme/v4/index.html",
   "peerDependencies": {
-    "jsdoc": "3"
+    "jsdoc": "^3.6.11"
   },
   "keywords": [
     "jsdoc",

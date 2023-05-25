@@ -10,7 +10,7 @@
                 <div><?js= section.name ?></div>
                 <svg><use xlink:href="#down-icon"></use></svg>
             </div>
-            <div class="sidebar-section-children-container">
+            <div class="sidebar-section-children-container" data-collapsible="<?js= (section.items.length > 7) ?>">
 
                 <?js 
                 section.items.forEach(function(item) { ?>

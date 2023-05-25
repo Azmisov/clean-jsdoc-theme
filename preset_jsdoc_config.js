@@ -1,7 +1,18 @@
 "use strict";
 const fs = require("fs");
-const p = JSON.parse(fs.readFileSync("./package.json"));
+function isDir(path){
+    try {
+        var stat = fs.lstatSync(path);
+        return stat.isDirectory();
+    } catch (e) {
+        // lstatSync throws an error if path doesn't exist
+        return false;
+    }
+}
 
+const tutorials_dir = "./tutorials/";
+const src_dirs = ["./src/", "./source/"];
+const p = JSON.parse(fs.readFileSync("./package.json"));
 // parse git repo
 let git = p.repository.url;
 git = git.substring(
@@ -14,7 +25,8 @@ const svg = {
     npm: `<svg viewBox="0 0 576 224"><path d="M 288,128 H 256 V 64 h 32 z M 576,0 V 192 H 288 v 32 H 160 V 192 H 0 V 0 Z M 160,32 H 32 V 160 H 96 V 64 h 32 v 96 h 32 z m 160,0 H 192 v 160 h 64 v -32 h 64 z m 224,0 H 352 v 128 h 64 V 64 h 32 v 96 h 32 V 64 h 32 v 96 h 32 z"/></svg>`
 };
 
-module.exports = {
+const opts = {
+    "recurseDepth":10,
     "source":{
         "include": [p.main],
         "includePattern": ".+\\.mjs$",
@@ -26,6 +38,7 @@ module.exports = {
     },
     "plugins": ["plugins/markdown"],
     "opts": {
+        "recurse": true,
         "encoding": "utf8",
         "readme": "./README.md",
         "verbose": true,
@@ -58,6 +71,17 @@ module.exports = {
                     "link": "https://www.npmjs.com/package/"+p.name,
                     "target": "_blank",
                 }
+            ],
+            "sections": [
+                'Tutorials',
+                'Interfaces',
+                'Modules',
+                'Namespaces',
+                'Global',
+                'Classes',
+                'Externals',
+                'Events',
+                'Mixins',
             ]
         }
     },
@@ -69,3 +93,11 @@ module.exports = {
         "idInHeadings": true
     }
 };
+if (isDir(tutorials_dir))
+    opts.opts.tutorials = tutorials_dir;
+// need to check first or we get non-zero exit code on non-existence
+for (const s of src_dirs){
+    if (isDir(s))
+        opts.source.include.push(s);
+}
+module.exports = opts;
