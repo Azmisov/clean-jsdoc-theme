@@ -1,5 +1,6 @@
 "use strict";
 const fs = require("fs");
+const path = require("path");
 function isDir(path){
     try {
         var stat = fs.lstatSync(path);
@@ -28,7 +29,7 @@ const svg = {
 const opts = {
     "recurseDepth":10,
     "source":{
-        "include": [p.main],
+        "include": [],
         "includePattern": ".+\\.mjs$",
     },
     "sourceType": "module",
@@ -95,9 +96,31 @@ const opts = {
 };
 if (isDir(tutorials_dir))
     opts.opts.tutorials = tutorials_dir;
-// need to check first or we get non-zero exit code on non-existence
-for (const s of src_dirs){
-    if (isDir(s))
-        opts.source.include.push(s);
+
+// Calculate paths to include
+/** Convert path to components */
+function path2lst(p){
+    return path.resolve(p).split(path.sep);
 }
+/** Takes two lists from `path2lst` and determines if ancestor holds descendant */
+function pathIsContaned(anc, desc){
+    for (let i=0; i<anc.length; i++){
+        if (desc[i] !== anc[i])
+            return false;
+    }
+    return true;
+}
+let main_lst = path2lst(p.main);
+let main_in_source = false;
+for (const s of src_dirs){
+    // need to check first or we get non-zero exit code on non-existence
+    if (isDir(s)){
+        opts.source.include.push(s);
+        // need to remove or else it will document the file's contents twice
+        main_in_source = main_in_source || pathIsContaned(path2lst(s), main_lst);
+    }
+}
+if (!main_in_source)
+    opts.source.include.push(p.main);
+
 module.exports = opts;
